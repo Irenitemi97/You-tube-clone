@@ -1,17 +1,14 @@
 import axios from "axios";
 
-const Base_URL = 'https://youtube-v31.p.rapidapi.com/captions'
+const Base_URL = 'https://youtube-v31.p.rapidapi.com/search'
 
 const options = {
     url: Base_URL,
     params: {
-      relatedToVideoId: '7ghhRHRP6t4',
-      part: 'id,snippet',
-      type: 'video',
       maxResults: '50'
     },
     headers: {
-      'X-RapidAPI-Key': '1af2989228msh488a502653b21ccp1c1a0cjsn589be208bc7d',
+      'X-RapidAPI-Key':process.env.REACT_APP_RAPID_API_KEY,
       'X-RapidAPI-Host': 'youtube-v31.p.rapidapi.com'
     }
   };
