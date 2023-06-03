@@ -18,7 +18,7 @@ export const logo = 'https://i.ibb.co/s9Qys2j/logo.png';
 export const categories = [
   { name: 'New', icon: <HomeIcon />, },
   { name: 'Mufti Menk', icon: <MosqueIcon/>, },
-  { name: 'JS Mastery', icon: <CodeIcon />, },
+  { name: 'freecodecamp.org', icon: <CodeIcon />, },
   { name: 'Coding', icon: <CodeIcon />, },
   { name: 'ReactJS', icon: <CodeIcon />, },
   { name: 'NextJS', icon: <CodeIcon />, },
