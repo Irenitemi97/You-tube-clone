@@ -1,23 +1,58 @@
 import React, { useState } from 'react';
 import { Paper, IconButton } from '@mui/material';
 import { Search, Mic } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 const SearchBar = () => {
-  const [searchText, setSearchText] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
 
-  const handleInputChange = (event) => {
-    setSearchText(event.target.value);
-  };
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Handle search submit
-    console.log('Search:', searchText);
+ 
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if(searchTerm) {
+       navigate(`/search/${searchTerm}`);
+
+       setSearchTerm('');
+    }
+    
+    
   };
 
   const handleMicClick = () => {
-    // Handle voice search
-    console.log('Voice search');
+    // Check if browser supports speech recognition
+    if ('webkitSpeechRecognition' in window) {
+      const recognition = new window.webkitSpeechRecognition();
+      recognition.lang = 'en-US';
+
+      // Start speech recognition
+      recognition.start();
+
+      // When speech recognition results are available
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        setSearchTerm(transcript);
+      };
+
+      // On speech recognition error
+      recognition.onerror = (event) => {
+        console.error('Speech recognition error:', event.error);
+      };
+
+      // On speech recognition end
+      recognition.onend = () => {
+        // Submit the search
+        if (searchTerm) {
+          navigate(`/search/${searchTerm}`);
+          setSearchTerm('');
+        }
+      };
+    } else {
+      console.log('Speech recognition not supported in this browser');
+    }
   };
 
   return (
@@ -37,8 +72,8 @@ const SearchBar = () => {
       <input
         className="search-bar"
         placeholder="Search..."
-        value={searchText}
-        onChange={handleInputChange}
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
       />
       <IconButton type="submit" sx={{ 
         p: '10px', 

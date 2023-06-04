@@ -4,22 +4,20 @@ import { Link } from "react-router-dom";
 
 import { demoProfilePicture } from "../assest/Constants";
 
-const ChannelCard = ({ channelDetail }) => {
+const ChannelCard = ({ channelDetail, marginTop }) => {
 
-    console.log('Channel Detail:', channelDetail);
-
-   
     return (
-        <Box   sx={{
+        <Box sx={{
             boxShadow: 'none',
             borderRadius: '20px',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            width: {md: '310px', sm: '240px', xs: '356px'},
+            width: { md: '300px', sm: '240px', xs: '356px' },
             height: '326px',
             margin: 'auto',
-          }}>
+            marginTop 
+        }}>
             <Link to={`/channel/${channelDetail?.id?.channelId}`}>
                 <CardContent sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', textAlign: 'center', color: '#fff' }}>
                     <CardMedia
